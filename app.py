@@ -41,7 +41,15 @@ def task_func():
     file = file_upload(label='Upload your text file', accept='.txt',required=True)
     content = file['content'].decode('utf-8').splitlines()
 
-
+    # Spell check 
+    new_doc = TextBlob(content)
+    result = new_doc.correct()
+    
+    
+    # Data cleaning pipeline
+    # Adarsh Code must be added here add here
+    
+    
 
     with put_loading(shape='grow',color='primary'):
         time.sleep(5)
