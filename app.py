@@ -14,6 +14,13 @@ from flask import Flask, send_from_directory
 import argparse
 from pywebio import start_server
 
+
+import nltk
+from nltk.tokenize import word_tokenize,sent_tokenize
+from nltk.corpus import stopwords
+import re
+
+    
 app = Flask(__name__)
 
 
@@ -47,10 +54,75 @@ def task_func():
     
     
     # Data cleaning pipeline
-    # Adarsh Code must be added here add here
-    
-    
+    for sentence in content: 
+        # Tokenisation
+        words=word_tokenize(sentence)
 
+
+        # Remove punctuations
+        filtered_text=[word for word in text if word not in string.punctuations]
+        sentence = ''.join(filtered_text)
+
+
+        # Stopwords removal
+        words=word_tokenize(sentence) stop_words = set(stopwords.words('english'))
+        filtered_sentence=[]
+         for word in words:
+              if word not in stop_words:
+                  filtered_sentence.append(word)
+        text =  ''.join(filtered_sentence)
+
+
+
+        # POS TAGGING 
+        words=word_tokanize(text) 
+        final_result=""
+        removable_words=['NN', 'NNS', 'NNP', 'NNPS', 'PRP', 'PRP$', 'WP', 'WP$'] 
+        parts_of_speach_tag=nltk.pos_tag(words)
+
+        for word in parts_of_speach_tag:
+            if word[1] not in removable_words:
+                final_result+=word[0]
+
+        text = final_result
+
+
+
+        # Removing emojt's
+        emoji pattern= re.compile("["
+
+        u"\U0001F600-\U0001F64F" # emoticons
+
+        u"\U0001F300-\U0001F5FF" # symbols & pictographs
+
+        u"\U0001F680-\U0001F6FF" # transport & map symbols
+
+        u"\U0001F1E0-\U0001F1FF"
+
+        # flags (tos)
+        "]+", flags=re.UNICODE)
+
+        text=emoji pattern.sub(r'', text)
+
+    # Removeing HTML Tags
+        CLEANR = re.compile('<.*?>]&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});") cleantext = re.sub(CLEANR, text) 9 text-cleantext
+
+    #Removing url's
+        URLless_string = re.sub('\w+:\/{2}{\d\w-}+{\.[\d\w-]+)*(?: (?:\/[^\s/]*))*,, text) = text-URLless_string
+
+    # Remove numbers
+        no_digits = []
+        for i in text:
+            if not i.isdigit():
+                no_digits.append(t)
+        final result.join(no_digits)
+
+        # Transformed text                        
+        content += final_result
+                            
+                            
+                            
+    # further API code
     with put_loading(shape='grow',color='primary'):
         time.sleep(5)
 
