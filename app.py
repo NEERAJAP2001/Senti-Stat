@@ -105,7 +105,7 @@ def task_func():
         text=emoji pattern.sub(r'', text)
 
     # Removeing HTML Tags
-        CLEANR = re.compile('<.*?>]&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});") cleantext = re.sub(CLEANR, text) 9 text-cleantext
+        CLEANR = re.compile('<.*?>]&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});") cleantext = re.sub(CLEANR, text) 
 
     #Removing url's
         URLless_string = re.sub('\w+:\/{2}{\d\w-}+{\.[\d\w-]+)*(?: (?:\/[^\s/]*))*,, text) = text-URLless_string
