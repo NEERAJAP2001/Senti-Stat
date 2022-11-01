@@ -119,7 +119,7 @@ def task_func():
             if word[1] not in removable_words:
                 final_result+=word[0]
 
-        content = final_result
+        content += final_result
 
 
 
