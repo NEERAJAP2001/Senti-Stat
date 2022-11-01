@@ -13,7 +13,7 @@ from pywebio import STATIC_PATH
 from flask import Flask, send_from_directory
 import argparse
 from pywebio import start_server
-
+import language_tool_python  
 
 import nltk
 from nltk.tokenize import word_tokenize,sent_tokenize
@@ -22,6 +22,7 @@ import re
 
     
 app = Flask(__name__)
+my_tool = language_tool_python.LanguageTool('en-US')  
 
 
 
@@ -52,8 +53,11 @@ def task_func():
     new_doc = TextBlob(content)
     result = new_doc.correct()
     
+    # Grammar correction 
+    content = my_tool.check(result)  
     
     # Data cleaning pipeline
+    sol = []
     for sentence in content: 
         # Tokenisation
         words=word_tokenize(sentence)
@@ -119,13 +123,15 @@ def task_func():
             if word[1] not in removable_words:
                 final_result+=word[0]
 
-        content += final_result
+        sol.append(final_result)
+                                
+                                
+   content = sol
 
 
 
 
-                       
-         
+               
                             
     # further API code
     with put_loading(shape='grow',color='primary'):
