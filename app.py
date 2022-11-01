@@ -13,16 +13,10 @@ from pywebio import STATIC_PATH
 from flask import Flask, send_from_directory
 import argparse
 from pywebio import start_server
-import language_tool_python  
-
-import nltk
-from nltk.tokenize import word_tokenize,sent_tokenize
-from nltk.corpus import stopwords
 import re
 
-    
+
 app = Flask(__name__)
-my_tool = language_tool_python.LanguageTool('en-US')  
 
 
 
