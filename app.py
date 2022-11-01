@@ -33,106 +33,99 @@ def task_func():
 
 
 
-
     def check(agree):
         if agree != ['I Agree to terms and conditions']:
             return 'Please agree to the terms and conditions'
-
 
     
     put_markdown(' ## Refer To Terms [Here](https://github.com/appdotnet/template-terms-of-service/blob/master/terms_template.md)')
     agree = checkbox("User terms and Conditions", options=['I Agree to terms and conditions'],validate=check)
 
 
-
-
     file = file_upload(label='Upload your text file', accept='.txt',required=True)
     content = file['content'].decode('utf-8').splitlines()
 
-    # Spell check 
-    new_doc = TextBlob(content)
-    result = new_doc.correct()
+#     # Spell check 
+#     new_doc = TextBlob(content)
+#     result = new_doc.correct()
     
-    # Grammar correction 
-    content = my_tool.check(result)  
+#     # Grammar correction 
+#     content = my_tool.check(result)  
     
-    # Data cleaning pipeline
-    sol = []
-    for sentence in content: 
-        # Tokenisation
-        words=word_tokenize(sentence)
+#     # Data cleaning pipeline
+#     sol = []
+#     for sentence in content: 
+#         # Tokenisation
+#         words=word_tokenize(sentence)
 
 
-        # Remove punctuations
-        filtered_text=[word for word in text if word not in string.punctuations]
-        sentence = ''.join(filtered_text)
+#         # Remove punctuations
+#         filtered_text=[word for word in text if word not in string.punctuations]
+#         sentence = ''.join(filtered_text)
         
         
-        # Removing emojt's
-        emoji pattern= re.compile("["
+#         # Removing emojt's
+#         emoji pattern= re.compile("["
 
-        u"\U0001F600-\U0001F64F" # emoticons
+#         u"\U0001F600-\U0001F64F" # emoticons
 
-        u"\U0001F300-\U0001F5FF" # symbols & pictographs
+#         u"\U0001F300-\U0001F5FF" # symbols & pictographs
 
-        u"\U0001F680-\U0001F6FF" # transport & map symbols
+#         u"\U0001F680-\U0001F6FF" # transport & map symbols
 
-        u"\U0001F1E0-\U0001F1FF" # flags (tos)
-        "]+", flags=re.UNICODE)
+#         u"\U0001F1E0-\U0001F1FF" # flags (tos)
+#         "]+", flags=re.UNICODE)
 
-        text=emoji pattern.sub(r'', text)
+#         text=emoji pattern.sub(r'', text)
 
-        # Removeing HTML Tags
-        CLEANR = re.compile('<.*?>]&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});") 
-        cleantext = re.sub(CLEANR, text) 
+#         # Removeing HTML Tags
+#         CLEANR = re.compile('<.*?>]&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});") 
+#         cleantext = re.sub(CLEANR, text) 
 
-        #Removing url's
-        URLless_string = re.sub('\w+:\/{2}{\d\w-}+{\.[\d\w-]+)*(?: (?:\/[^\s/]*))*, text)  
-        text=URLless_string
+#         #Removing url's
+#         URLless_string = re.sub('\w+:\/{2}{\d\w-}+{\.[\d\w-]+)*(?: (?:\/[^\s/]*))*, text)  
+#         text=URLless_string
 
-        # Remove numbers
-        no_digits = []
-        for i in text:
-            if not i.isdigit():
-                no_digits.append(t)
-        final_result.join(no_digits)
+#         # Remove numbers
+#         no_digits = []
+#         for i in text:
+#             if not i.isdigit():
+#                 no_digits.append(t)
+#         final_result.join(no_digits)
 
-        # Transformed text     
-        sentence = ''
-        sentence += final_result
-
-
-        # Stopwords removal
-        words=word_tokenize(sentence) 
-        stop_words = set(stopwords.words('english'))
-        filtered_sentence=[]
-         for word in words:
-              if word not in stop_words:
-                  filtered_sentence.append(word)
-        text =  ''.join(filtered_sentence)
+#         # Transformed text     
+#         sentence = ''
+#         sentence += final_result
 
 
+#         # Stopwords removal
+#         words=word_tokenize(sentence) 
+#         stop_words = set(stopwords.words('english'))
+#         filtered_sentence=[]
+#          for word in words:
+#               if word not in stop_words:
+#                   filtered_sentence.append(word)
+#         text =  ''.join(filtered_sentence)
 
-        # POS TAGGING 
-        words=word_tokanize(text) 
-        final_result=""
-        removable_words=['NN', 'NNS', 'NNP', 'NNPS', 'PRP', 'PRP$', 'WP', 'WP$'] 
-        parts_of_speach_tag=nltk.pos_tag(words)
 
-        for word in parts_of_speach_tag:
-            if word[1] not in removable_words:
-                final_result+=word[0]
 
-        sol.append(final_result)
+#         # POS TAGGING 
+#         words=word_tokanize(text) 
+#         final_result=""
+#         removable_words=['NN', 'NNS', 'NNP', 'NNPS', 'PRP', 'PRP$', 'WP', 'WP$'] 
+#         parts_of_speach_tag=nltk.pos_tag(words)
+
+#         for word in parts_of_speach_tag:
+#             if word[1] not in removable_words:
+#                 final_result+=word[0]
+
+#         sol.append(final_result)
                                 
                                 
-   content = sol
+#    content = sol
 
 
-
-
-               
-                            
+                           
     # further API code
     with put_loading(shape='grow',color='primary'):
         time.sleep(5)
